@@ -1,0 +1,29 @@
+%{
+#include <stdio.h>
+%}
+
+%option noyywrap
+
+%%
+
+[-+]?[0-9]+     { 
+                    int num = atoi(yytext); // Convert matched text to an integer
+                    if(num > 0)
+                        printf("Positive number: %d\n", num);
+                    else if(num < 0)
+                        printf("Negative number: %d\n", num);
+                    else
+                        printf("Zero: %d\n", num);
+                }
+.|\n            ;
+
+%%
+
+int main() {
+    yylex();
+    return 0;
+}
+
+int mywrap() {
+    return 1; // Indicate end of input
+}
